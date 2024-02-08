@@ -17,7 +17,7 @@ const DataTable: React.FC = () => {
     const [selectedRows, setSelectedRows] = useState<DataRow[]>([]);
     const [searchTerm, setSearchTerm] = useState<string>("");
     const [currentPage, setCurrentPage] = useState<number>(1);
-    const itemsPerPage = 10; // Set the number of items per page
+    const itemsPerPage = 10; //  number of items per page
     const [totalItemCount, setTotalItemCount] = useState(0)
     const [loading, setLoading] = useState(false);
 
@@ -151,9 +151,9 @@ const DataTable: React.FC = () => {
                     </table>
 
                     <Pagination
-                        totalItems={totalItemCount} // Pass the total number of items
-                        itemsPerPage={itemsPerPage} // Pass the number of items per page
-                        onPageChange={handlePageChange} // Pass the callback function to handle page changes
+                        totalItems={totalItemCount}
+                        itemsPerPage={itemsPerPage}
+                        onPageChange={handlePageChange}
                     />
                 </div>
 
