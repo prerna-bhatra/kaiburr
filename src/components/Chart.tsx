@@ -5,31 +5,75 @@ import Plot from "react-plotly.js";
 interface DataRow {
     id: number;
     title: string;
-    brand:string;
+    brand: string;
     price: number;
     rating: number;
 }
 
 interface Props {
-  data: DataRow[];
+    data: DataRow[];
 }
 
 const Chart: React.FC<Props> = ({ data }) => {
-  const [chartData, setChartData] = useState<number[]>([]);
+    const [priceData, setPriceData] = useState<number[]>([]);
 
-  useEffect(() => {
-    const newData = data.map((row) => row.price);
-    setChartData(newData);
-  }, [data]);
+    const [stockData, setStockData] = useState<number[]>([]);
 
-  return (
-    <div>
-      <Plot
-        data={[{ type: "bar", x: data.map((row) => row.id), y: chartData }]}
-        layout={{ width: 800, height: 400, title: "Bar Chart" }}
-      />
-    </div>
-  );
+
+    useEffect(() => {
+        const priceData = data.map((row) => row.price);
+        const stockData = data.map((row) => row.rating);
+
+        setPriceData(priceData);
+        setStockData(stockData)
+    }, [data]);
+
+    return (
+        <div >
+            <div className="flex">
+                <Plot
+                    data={[{ type: "bar", x: data.map((row) => row.title), y: priceData }]}
+                    layout={{
+                        width: 300, height: 300, title: "Price and Title",
+                        // xaxis: { title: "Title" },
+                        // yaxis: { title: "Price" }
+                    }}
+                />
+
+                <Plot
+                    data={[{ type: "bar", x: data.map((row) => row.title), y: stockData }]}
+                    layout={{
+                        width: 300, height: 300, title: "Stcok and Title",
+                        // xaxis: { title: "Title" },
+                        // yaxis: { title: "Stock" }
+                    }}
+                />
+
+            </div>
+
+
+            <div className="flex">
+                <Plot
+                    data={[{ type: "bar", x: data.map((row) => row.brand), y: priceData }]}
+                    layout={{
+                        width: 300, height: 300, title: "Price and Brand",
+                        // xaxis: { title: "Title" },
+                        // yaxis: { title: "Price" }
+                    }}
+                />
+
+                <Plot
+                    data={[{ type: "bar", x: data.map((row) => row.brand), y: stockData }]}
+                    layout={{
+                        width: 300, height: 300, title: "Stcok and Brand",
+                        // xaxis: { title: "Title" },
+                        // yaxis: { title: "Stock" }
+                    }}
+                />
+            </div>
+
+        </div>
+    );
 };
 
 export default Chart;
